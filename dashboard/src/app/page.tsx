@@ -28,7 +28,8 @@ export default function Home() {
   const totalTodos = todos.length;
   const completedTodos = todos.filter((todo) => todo.completed).length;
   const pendingTodos = totalTodos - completedTodos;
-  const completionRate = Math.round((completedTodos / totalTodos) * 100);
+  const completionRate =
+    totalTodos > 0 ? Math.round((completedTodos / totalTodos) * 100) : 0;
   const highPriorityPending = todos.filter(
     (todo) => !todo.completed && todo.priority === "high",
   ).length;
@@ -123,7 +124,7 @@ export default function Home() {
                   />
                   <Chip
                     label={`High-priority pending: ${highPriorityPending}`}
-                    color={highPriorityPending ? "error" : "success"}
+                    color={highPriorityPending > 0 ? "error" : "success"}
                     variant="outlined"
                   />
                 </Stack>
